@@ -1,3 +1,22 @@
+import { Switch, Route } from 'react-router-dom';
+import Auth from './views/Auth/Auth';
+import Tetris from './views/Tetris/Tetris';
+import ScoreBoard from './views/Scoreboard/Scoreboard';
+
 export default function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <>
+      <Switch>
+        <Route path="/login">
+          <Auth />
+        </Route>
+        <Route path="/scores">
+          <ScoreBoard />
+        </Route>
+        <Route path="/">
+          <Tetris />
+        </Route>
+      </Switch>
+    </>
+  );
 }
