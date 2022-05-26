@@ -6,7 +6,6 @@ export default function GameGrid({ grid }) {
     <div>
       {console.log('grid', grid)}
       {grid.map((row) => row.map((cell, x) => <Cell key={x} type={cell[0]} />))}
-      ;
-    </div>
+          </div>
   );
 }
