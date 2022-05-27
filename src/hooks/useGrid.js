@@ -25,7 +25,7 @@ export const useGrid = (player, resetPlayer) => {
     };
 
     setGrid(prev => updateGrid(prev))
-  }, [player.collided, player.pos.x, player.pos.y, player.tetromino]);
+  }, [player]);
 
   return [grid, setGrid];
 };
