@@ -8,16 +8,46 @@ import {
   StyledTetrisWrapper,
   StyledTetris,
 } from '../../components/Styles/StyledTetris';
+import { createGameGrid } from '../../utils/gameUtils';
 
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [player] = usePlayer();
+  const [player, updatePlayerPosition, resetPlayer] = usePlayer();
   const [grid, setGrid] = useGrid(player);
+
+  const movePlayer = direction => {
+    updatePlayerPosition({ x: direction, y: 0 });
+  }
+
+  const startGame = () => {
+    setGrid(createGameGrid());
+    resetPlayer();
+  }
+
+  const drop = () => {
+    updatePlayerPosition({ x: 0, y: 1, collided: false })
+  }
+
+  const dropPlayer = () => {
+    drop();
+  }
+
+  const move = ({ keyCode }) => {
+    if (!gameOver) {
+      if(keyCode === 37) {
+        movePlayer(-1);
+      } else if(keyCode === 39) {
+        movePlayer(1)
+      } else if(keyCode === 40) {
+        dropPlayer();
+      }
+    }
+  }
 
   return (
     <>
-      <StyledTetrisWrapper>
+      <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
         <h1>Tetris</h1>
         <StyledTetris>
           <GameGrid grid={grid} />
@@ -31,7 +61,7 @@ export default function Tetris() {
                 <Display text="Level" />
               </div>
             )}
-            <StartButton />
+            <StartButton onClick={startGame} />
           </aside>
         </StyledTetris>
       </StyledTetrisWrapper>

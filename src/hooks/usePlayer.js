@@ -1,11 +1,29 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { GRID_WIDTH } from '../utils/gameUtils';
 import { randomTetromino } from '../utils/tetrominos';
 
 export const usePlayer = () => {
-  const [player, setplayer] = useState({
+  const [player, setPlayer] = useState({
     pos: { x: 0, y: 0 },
     tetromino: randomTetromino().shape,
     collided: false,
   });
-  return [player];
+
+  const updatePlayerPosition = ({ x, y, collided }) => {
+    setPlayer(prev => ({
+      ...prev,
+      pos: { x: (prev.pos.x += x), y: (prev.pos.y += y)},
+      collided,
+    }))
+  }
+
+  const resetPlayer = useCallback(() => {
+    setPlayer({
+      pos: { x: GRID_WIDTH / 2 - 2, y: 0 },
+      tetromino: randomTetromino().shape,
+      collided: false,
+    })
+  }, [])
+
+  return [player, updatePlayerPosition, resetPlayer];
 };
