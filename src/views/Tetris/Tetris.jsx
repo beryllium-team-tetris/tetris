@@ -9,6 +9,7 @@ import {
   StyledTetris,
 } from '../../components/Styles/StyledTetris';
 import { createGameGrid, checkCollision } from '../../utils/gameUtils';
+import { useInterval } from '../../hooks/useInterval';
 
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
