@@ -8,46 +8,64 @@ import {
   StyledTetrisWrapper,
   StyledTetris,
 } from '../../components/Styles/StyledTetris';
-import { createGameGrid } from '../../utils/gameUtils';
+import { createGameGrid, checkCollision } from '../../utils/gameUtils';
 
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPosition, resetPlayer] = usePlayer();
-  const [grid, setGrid] = useGrid(player);
+  const [grid, setGrid] = useGrid(player, resetPlayer);
 
-  const movePlayer = direction => {
-    updatePlayerPosition({ x: direction, y: 0 });
-  }
+  const movePlayer = (direction) => {
+    console.log('direction', direction);
+    if (!checkCollision(player, grid, { x: direction, y: 0 })) {
+      updatePlayerPosition({ x: direction - 0.5, y: 0 });
+    }
+  };
 
   const startGame = () => {
     setGrid(createGameGrid());
     resetPlayer();
-  }
+    setGameOver(false);
+  };
 
   const drop = () => {
-    updatePlayerPosition({ x: 0, y: 1, collided: false })
-  }
+    if (!checkCollision(player, grid, { x: 0, y: 1 })) {
+      updatePlayerPosition({ x: 0, y: 1, collided: false });
+    } else {
+      if (player.pos.y < 1) {
+        console.log('game over');
+        setGameOver(true);
+        setDropTime(null);
+      }
+      updatePlayerPosition({ x: 0, y: 0, collided: true });
+    }
+  };
 
   const dropPlayer = () => {
     drop();
-  }
+  };
 
   const move = ({ keyCode }) => {
+    console.log('move is called! keycode: ', keyCode);
     if (!gameOver) {
-      if(keyCode === 37) {
-        movePlayer(-1);
-      } else if(keyCode === 39) {
-        movePlayer(1)
-      } else if(keyCode === 40) {
+      if (keyCode === 37 || keyCode === 65) {
+        movePlayer(0);
+      } else if (keyCode === 39 || keyCode === 68) {
+        movePlayer(1);
+      } else if (keyCode === 40 || keyCode === 83) {
         dropPlayer();
       }
     }
-  }
+  };
 
   return (
     <>
-      <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
+      <StyledTetrisWrapper
+        role="button"
+        tabIndex="0"
+        onKeyDown={(e) => move(e)}
+      >
         <h1>Tetris</h1>
         <StyledTetris>
           <GameGrid grid={grid} />

@@ -10,20 +10,23 @@ export const usePlayer = () => {
   });
 
   const updatePlayerPosition = ({ x, y, collided }) => {
-    setPlayer(prev => ({
+    console.log('updatePlayerPosition called');
+    console.log('x', x);
+    console.log('y', y);
+    setPlayer((prev) => ({
       ...prev,
-      pos: { x: (prev.pos.x += x), y: (prev.pos.y += y)},
+      pos: { x: (prev.pos.x += x), y: (prev.pos.y += y) },
       collided,
-    }))
-  }
+    }));
+  };
 
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: GRID_WIDTH / 2 - 2, y: 0 },
       tetromino: randomTetromino().shape,
       collided: false,
-    })
-  }, [])
+    });
+  }, []);
 
   return [player, updatePlayerPosition, resetPlayer];
 };
