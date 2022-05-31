@@ -17,7 +17,6 @@ export default function Tetris() {
   const [grid, setGrid] = useGrid(player, resetPlayer);
 
   const movePlayer = (direction) => {
-    console.log('direction', direction);
     if (!checkCollision(player, grid, { x: direction, y: 0 })) {
       updatePlayerPosition({ x: direction, y: 0 });
     }
@@ -34,7 +33,6 @@ export default function Tetris() {
       updatePlayerPosition({ x: 0, y: 1, collided: false });
     } else {
       if (player.pos.y < 1) {
-        console.log('game over');
         setGameOver(true);
         setDropTime(null);
       }
@@ -47,7 +45,6 @@ export default function Tetris() {
   };
 
   const move = ({ keyCode }) => {
-    console.log('move is called! keycode: ', keyCode);
     if (!gameOver) {
       if (keyCode === 37 || keyCode === 65) {
         movePlayer(-1);
