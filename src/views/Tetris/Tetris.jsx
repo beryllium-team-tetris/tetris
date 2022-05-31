@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import GameGrid from '../../components/GameGrid/GameGrid';
 import Display from '../../components/Display/Display';
 import StartButton from '../../components/StartButton/StartButton';
-import { usePlayer } from '../../hooks/usePlayer';
 import { useGrid } from '../../hooks/useGrid';
+import { usePlayer } from '../../hooks/usePlayer';
 import {
   StyledTetrisWrapper,
   StyledTetris,
@@ -19,7 +19,7 @@ export default function Tetris() {
   const movePlayer = (direction) => {
     console.log('direction', direction);
     if (!checkCollision(player, grid, { x: direction, y: 0 })) {
-      updatePlayerPosition({ x: direction - 0.5, y: 0 });
+      updatePlayerPosition({ x: direction, y: 0 });
     }
   };
 
@@ -50,7 +50,7 @@ export default function Tetris() {
     console.log('move is called! keycode: ', keyCode);
     if (!gameOver) {
       if (keyCode === 37 || keyCode === 65) {
-        movePlayer(0);
+        movePlayer(-1);
       } else if (keyCode === 39 || keyCode === 68) {
         movePlayer(1);
       } else if (keyCode === 40 || keyCode === 83) {

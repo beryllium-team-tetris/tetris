@@ -10,12 +10,9 @@ export const usePlayer = () => {
   });
 
   const updatePlayerPosition = ({ x, y, collided }) => {
-    console.log('updatePlayerPosition called');
-    console.log('x', x);
-    console.log('y', y);
     setPlayer((prev) => ({
       ...prev,
-      pos: { x: (prev.pos.x += x), y: (prev.pos.y += y) },
+      pos: { x: prev.pos.x + x, y: prev.pos.y + y },
       collided,
     }));
   };
