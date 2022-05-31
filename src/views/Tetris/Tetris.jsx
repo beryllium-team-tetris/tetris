@@ -13,7 +13,7 @@ import { createGameGrid, checkCollision } from '../../utils/gameUtils';
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [player, updatePlayerPosition, resetPlayer] = usePlayer();
+  const [player, updatePlayerPosition, resetPlayer, playerRotate] = usePlayer();
   const [grid, setGrid] = useGrid(player, resetPlayer);
 
   const movePlayer = (direction) => {
@@ -55,6 +55,8 @@ export default function Tetris() {
         movePlayer(1);
       } else if (keyCode === 40 || keyCode === 83) {
         dropPlayer();
+      } else if (keyCode === 38 || keyCode === 87) {
+        playerRotate(grid, 1);
       }
     }
   };
