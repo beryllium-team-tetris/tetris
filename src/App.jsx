@@ -29,11 +29,11 @@ export default function App() {
           <CreateProfile />
         </Route>
         <PrivateRoute path="/profile/:id/edit">
-          <ProfileEdit />
+          <EditProfile />
         </PrivateRoute>
         <PrivateRoute path="/profile/:id">
           <Profile />
-        </PrivateRoute> */}
+        </PrivateRoute>
 
         <Route path="/">
           <Tetris />
