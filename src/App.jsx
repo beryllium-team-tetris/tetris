@@ -1,5 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Header from './components/Header/Header';
 import Auth from './views/Auth/Auth';
 import Tetris from './views/Tetris/Tetris';
 import Leaderboard from './views/Scores/Leaderboard';
@@ -8,6 +9,7 @@ import ScoreDetail from './views/Scores/ScoreDetail';
 export default function App() {
   return (
     <>
+      <Header />
       <Switch>
         <Route path="/login">
           <Auth />

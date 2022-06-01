@@ -1,5 +1,6 @@
 import { useAuth } from "../../hooks/user";
 import { Link } from "react-router-dom";
+import headerStyling from './Header.css';
 
 export default function Header() {
 
@@ -10,23 +11,25 @@ export default function Header() {
   };
 
   return (
-    <>
+    <header>
     <h1>Tetris</h1>
-    <p>User: {currentUser.email}</p>
     {!currentUser ? 
-    <Link to="/profile/create">
-        <button>Create profile</button>
+    <Link to="/login">
+        <button>Sign-up</button>
     </Link> 
     : 
-    <Link to="/profile/:id">
+    <>
+    <p>User: {currentUser.email}</p>
+    {<Link to="/profile/:id">
         <button>Your Profile</button>
-    </Link>
-    }
+    </Link>}
     <button
      type="submit"
      onClick={handleSubmit}>
          Logout
      </button>
     </>
+    }
+    </header>
   )
 }
