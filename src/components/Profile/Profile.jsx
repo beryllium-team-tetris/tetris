@@ -3,13 +3,15 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchProfileById } from '../../services/profile';
+import { fetchScoresByProfileId } from '../../services/scores';
 import { StyledTetrisWrapper } from '../Styles/StyledTetris';
 
 export default function Profile() {
   const [profile, setProfile] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-
+  const [loadingScore, setLoadingScore] = useState(true);
+  const [scores, setScores] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -25,19 +27,18 @@ export default function Profile() {
     fetchData();
   }, [id]);
 
-  //   useEffect(() => {
-  //     const fetchScores = async () => {
-  //       try {
-  //         //make sure to insert proper fetch
-  //         const data = await insertfetchhere();
-  //         setScore(data);
-  //         // setLoadingScore(false);
-  //       } catch (error) {
-  //         setError(error.message);
-  //       }
-  //     };
-  //     fetchScores();
-  //   }, []);
+  useEffect(() => {
+    const fetchScores = async () => {
+      try {
+        const data = await fetchScoresByProfileId(id);
+        setScores(data);
+        setLoadingScore(false);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+    fetchScores();
+  }, [id]);
 
   if (loading)
     return (
@@ -55,7 +56,13 @@ export default function Profile() {
         <p>Email: {profile.email}</p>
       </div>
       <div>
-        <h1>Placeholder for scores</h1>
+        <ol>
+          {scores.map((score) => (
+            <li key={score.id}>
+              {`Time Created: ${score.created_at}   Score: ${score.score}`}
+            </li>
+          ))}
+        </ol>
       </div>
     </StyledTetrisWrapper>
   );
