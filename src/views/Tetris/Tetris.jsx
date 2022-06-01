@@ -65,14 +65,12 @@ export default function Tetris() {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40 || keyCode === 83) {
-        console.log('interval on');
         setDropTime(getDropTime(level));
       }
     }
   };
 
   const dropPlayer = () => {
-    console.log('interval off');
     setDropTime(null);
     drop();
   };
