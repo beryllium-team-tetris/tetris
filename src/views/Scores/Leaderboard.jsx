@@ -2,6 +2,7 @@ import React from 'react';
 import { StyledTetrisWrapper } from '../../components/Styles/StyledTetris';
 import { useScores } from '../../hooks/scores';
 import { getScores } from '../../services/scores';
+import { Link } from 'react-router-dom';
 
 export default function Leaderboard() {
   const { scores } = useScores();
@@ -12,7 +13,11 @@ export default function Leaderboard() {
 
       <ol>
         {topScores.map((score) => (
-          <li key={score.id}>{`${score.profiles.username} ${score.score}`}</li>
+          <Link to={`/profile/${score.profile_id}`}>
+            <li
+              key={score.id}
+            >{`${score.profiles.username} ${score.score}`}</li>
+          </Link>
         ))}
       </ol>
     </StyledTetrisWrapper>
