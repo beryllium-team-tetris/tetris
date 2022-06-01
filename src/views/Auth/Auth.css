@@ -1,0 +1,12 @@
+.active {
+    color: green;
+    text-decoration: underline;
+}
+
+.body {
+    background-color: black;
+}
+
+input {
+    color: black
+}
