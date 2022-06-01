@@ -1,4 +1,4 @@
-export const UserData = {
+export const fakeUserData = {
     
     access_token: "12345",
     token_type: "bearer",
