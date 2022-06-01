@@ -1,4 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Header from './components/Header/Header';
 import Auth from './views/Auth/Auth';
 import Tetris from './views/Tetris/Tetris';
 import Leaderboard from './views/Scores/Leaderboard';
@@ -10,30 +12,28 @@ import Profile from './components/Profile/profile';
 export default function App() {
   return (
     <>
+      <Header />
       <Switch>
         <Route path="/login">
           <Auth />
         </Route>
 
-        <Route path="/scores/:id">
+        <PrivateRoute exact path="/scores/:id">
           <ScoreDetail />
-        </Route>
-
-        <Route path="/scores">
+        </PrivateRoute>
+        <PrivateRoute exact path="/scores">
           <Leaderboard />
-        </Route>
+        </PrivateRoute>
 
         <Route path="/profile/create">
           <CreateProfile />
         </Route>
-
-        <Route path="/profile/:id/edit">
-          <EditProfile />
-        </Route>
-
-        <Route path="/profile/:id">
+        <PrivateRoute path="/profile/:id/edit">
+          <ProfileEdit />
+        </PrivateRoute>
+        <PrivateRoute path="/profile/:id">
           <Profile />
-        </Route>
+        </PrivateRoute> */}
 
         <Route path="/">
           <Tetris />
