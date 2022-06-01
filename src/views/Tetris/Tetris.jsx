@@ -4,12 +4,14 @@ import Display from '../../components/Display/Display';
 import StartButton from '../../components/StartButton/StartButton';
 import { useGrid } from '../../hooks/useGrid';
 import { usePlayer } from '../../hooks/usePlayer';
+
 import {
   StyledTetrisWrapper,
   StyledTetris,
 } from '../../components/Styles/StyledTetris';
+
 import { createGameGrid, checkCollision } from '../../utils/gameUtils';
-import { useInterval } from '../../hooks/useInterval';
+import useInterval from '../../hooks/useInterval';
 
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
@@ -25,6 +27,7 @@ export default function Tetris() {
 
   const startGame = () => {
     setGrid(createGameGrid());
+    setDropTime(1000);
     resetPlayer();
     setGameOver(false);
   };
@@ -41,7 +44,18 @@ export default function Tetris() {
     }
   };
 
+  const keyUp = ({ keyCode }) => {
+    if (!gameOver) {
+      if (keyCode === 40 || keyCode === 83) {
+        console.log('interval on');
+        setDropTime(1000);
+      }
+    }
+  };
+
   const dropPlayer = () => {
+    console.log('interval off');
+    setDropTime(null);
     drop();
   };
 
@@ -59,12 +73,17 @@ export default function Tetris() {
     }
   };
 
+  useInterval(() => {
+    drop();
+  }, dropTime);
+
   return (
     <>
       <StyledTetrisWrapper
         role="button"
         tabIndex="0"
         onKeyDown={(e) => move(e)}
+        onKeyUp={keyUp}
       >
         <h1>Tetris</h1>
         <StyledTetris>
