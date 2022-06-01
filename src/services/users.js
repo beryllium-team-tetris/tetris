@@ -11,14 +11,12 @@ export function getSession() {
 
 export async function signUpUser(email, password) {
   const { user, error } = await client.auth.signUp({ email, password });
-  console.log('user resp', user);
   const profile_resp = await createProfile({
     email,
     user_id: user.id,
     username: '',
     name: '',
   });
-  console.log('profile resp', profile_resp);
   if (error) throw error;
   return user;
 }

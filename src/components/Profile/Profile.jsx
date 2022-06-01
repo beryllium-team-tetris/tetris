@@ -8,20 +8,18 @@ import { StyledTetrisWrapper } from '../Styles/StyledTetris';
 export default function Profile() {
   const [profile, setProfile] = useState('');
   const [error, setError] = useState('');
-  //   const [loading, setLoading] = useState('true');
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //make sure to insert proper fetch
         const data = await fetchProfileById(id);
-        console.log(data);
         setProfile(data);
         setLoading(false);
       } catch (error) {
-        setError('Issue with fetching profile.');
+        setError(error.message);
       }
     };
     fetchData();
@@ -41,7 +39,12 @@ export default function Profile() {
   //     fetchScores();
   //   }, []);
 
-  //   if (loading) return <h1>Loading Profile</h1>;
+  if (loading)
+    return (
+      <StyledTetrisWrapper>
+        <h1>Loading Profile</h1>
+      </StyledTetrisWrapper>
+    );
 
   return (
     <StyledTetrisWrapper>

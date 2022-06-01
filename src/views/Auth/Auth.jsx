@@ -28,7 +28,6 @@ export default function Auth() {
       } else {
         event.preventDefault();
         const user_resp = await signUp(email, password);
-        console.log('user_resp', user_resp);
         history.replace('/');
       }
     } catch (error) {
