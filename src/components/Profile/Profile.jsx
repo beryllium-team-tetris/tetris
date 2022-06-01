@@ -2,11 +2,13 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchProfileById } from '../../services/profile';
+import { StyledTetrisWrapper } from '../Styles/StyledTetris';
 
-export default function Profile({ currentUser }) {
+export default function Profile() {
   const [profile, setProfile] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState('true');
+  //   const [loading, setLoading] = useState('true');
 
   const { id } = useParams();
 
@@ -14,7 +16,8 @@ export default function Profile({ currentUser }) {
     const fetchData = async () => {
       try {
         //make sure to insert proper fetch
-        const data = await insertfetchhere(id);
+        const data = await fetchProfileById(id);
+        console.log(data);
         setProfile(data);
         setLoading(false);
       } catch (error) {
@@ -24,24 +27,24 @@ export default function Profile({ currentUser }) {
     fetchData();
   }, [id]);
 
-  useEffect(() => {
-    const fetchScores = async () => {
-      try {
-        //make sure to insert proper fetch
-        const data = await insertfetchhere();
-        setScore(data);
-        setLoadingScore(false);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    fetchScores();
-  }, []);
+  //   useEffect(() => {
+  //     const fetchScores = async () => {
+  //       try {
+  //         //make sure to insert proper fetch
+  //         const data = await insertfetchhere();
+  //         setScore(data);
+  //         // setLoadingScore(false);
+  //       } catch (error) {
+  //         setError(error.message);
+  //       }
+  //     };
+  //     fetchScores();
+  //   }, []);
 
-  if (loading) return <h1>Loading Profile</h1>;
+  //   if (loading) return <h1>Loading Profile</h1>;
 
   return (
-    <div>
+    <StyledTetrisWrapper>
       {error && <p>{error}</p>}
       <div key={profile.id}>
         <h1>{profile.name}</h1>
@@ -51,6 +54,6 @@ export default function Profile({ currentUser }) {
       <div>
         <h1>Placeholder for scores</h1>
       </div>
-    </div>
+    </StyledTetrisWrapper>
   );
 }
