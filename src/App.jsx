@@ -5,6 +5,9 @@ import Auth from './views/Auth/Auth';
 import Tetris from './views/Tetris/Tetris';
 import Leaderboard from './views/Scores/Leaderboard';
 import ScoreDetail from './views/Scores/ScoreDetail';
+import EditProfile from './components/Profile/EditProfile';
+import CreateProfile from './components/Profile/CreateProfile';
+import Profile from './components/Profile/profile';
 
 export default function App() {
   return (
@@ -22,7 +25,7 @@ export default function App() {
           <Leaderboard />
         </PrivateRoute>
 
-        {/* <Route path="/profile/create">
+        <Route path="/profile/create">
           <CreateProfile />
         </Route>
         <PrivateRoute path="/profile/:id/edit">
