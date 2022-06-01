@@ -1,25 +1,12 @@
-import { client } from './client';
+import { createClient } from "@supabase/supabase-js";
 
-export function getUser() {
-    return client.auth.user();
-}
+export const client = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
+);
 
-export function getSession() {
-    return client.auth.session();
-}
-
-export async function signUpUser(email, password) {
-    const { user, error } = await client.auth.signUp({ email, password });
+export const parseData = ({ data, error }) => {
     if (error) throw error;
-    return user;
-}
 
-export async function signInUser(email, password) {
-    const { user, error } = await client.auth.signIn({ email, password });
-    if (error) throw error;
-    return user;
-}
-
-export async function signOutUser() {
-    return client.auth.signOut();
-}
+    return data;
+};
