@@ -30,3 +30,5 @@ export const checkCollision = (player, grid, { x: moveX, y: moveY }) => {
   }
   return false;
 };
+
+export const getDropTime = (level) => 1000 / (level + 1) + 200;

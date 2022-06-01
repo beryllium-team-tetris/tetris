@@ -8,16 +8,15 @@ export const useGrid = (player, resetPlayer) => {
   useEffect(() => {
     setRowsCleared(0);
 
-    const sweepRows = newGrid => 
-      newGrid.reduce((ack, row) => {
-        if (row.findIndex(cell => cell[0] === 0) === -1) {
-          setRowsCleared(prev => prev + 1);
-          ack.unshift(new Array(newGrid[0].length).fill([0, 'clear']));
-          return ack;
+    const sweepRows = (newGrid) =>
+      newGrid.reduce((acc, row) => {
+        if (row.findIndex((cell) => cell[0] === 0) === -1) {
+          setRowsCleared((prev) => prev + 1);
+          acc.unshift(new Array(newGrid[0].length).fill([0, 'clear']));
+          return acc;
         }
-        ack.push(row);
-        return ack;
-
+        acc.push(row);
+        return acc;
       }, []);
 
     const updateGrid = (prevGrid) => {

@@ -2,22 +2,31 @@ import React, { useState } from 'react';
 import GameGrid from '../../components/GameGrid/GameGrid';
 import Display from '../../components/Display/Display';
 import StartButton from '../../components/StartButton/StartButton';
-import { useGrid } from '../../hooks/useGrid';
-import { usePlayer } from '../../hooks/usePlayer';
 
 import {
   StyledTetrisWrapper,
   StyledTetris,
 } from '../../components/Styles/StyledTetris';
 
-import { createGameGrid, checkCollision } from '../../utils/gameUtils';
+import {
+  createGameGrid,
+  checkCollision,
+  getDropTime,
+} from '../../utils/gameUtils';
+
+// Custom hooks
+import { useGrid } from '../../hooks/useGrid';
+import { usePlayer } from '../../hooks/usePlayer';
 import useInterval from '../../hooks/useInterval';
+import { useGameStatus } from '../../hooks/useGameStatus';
 
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPosition, resetPlayer, playerRotate] = usePlayer();
-  const [grid, setGrid] = useGrid(player, resetPlayer);
+  const [grid, setGrid, rowsCleared] = useGrid(player, resetPlayer);
+  const [score, setScore, rows, setRows, level, setLevel] =
+    useGameStatus(rowsCleared);
 
   const movePlayer = (direction) => {
     if (!checkCollision(player, grid, { x: direction, y: 0 })) {
@@ -30,9 +39,18 @@ export default function Tetris() {
     setDropTime(1000);
     resetPlayer();
     setGameOver(false);
+    setScore(0);
+    setRows(0);
+    setLevel(1);
   };
 
   const drop = () => {
+    // Increase level when player has cleared 10 rows
+    if (rows >= level * 10) {
+      setLevel((prev) => prev + 1);
+      // Also increase speed
+      setDropTime(getDropTime(level));
+    }
     if (!checkCollision(player, grid, { x: 0, y: 1 })) {
       updatePlayerPosition({ x: 0, y: 1, collided: false });
     } else {
@@ -48,7 +66,7 @@ export default function Tetris() {
     if (!gameOver) {
       if (keyCode === 40 || keyCode === 83) {
         console.log('interval on');
-        setDropTime(1000);
+        setDropTime(getDropTime(level));
       }
     }
   };
@@ -93,9 +111,9 @@ export default function Tetris() {
               <Display gameOver={gameOver} text="Game Over!" />
             ) : (
               <div>
-                <Display text="Score" />
-                <Display text="Rows" />
-                <Display text="Level" />
+                <Display text={`Score: ${score}`} />
+                <Display text={`Rows: ${rows}`} />
+                <Display text={`Level: ${level}`} />
               </div>
             )}
             <StartButton callback={startGame} />
