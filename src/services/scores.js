@@ -21,3 +21,8 @@ export async function fetchScoresByProfileId(profile_id) {
     .order('score', { ascending: false });
   return parseData(resp);
 }
+
+export async function deleteScore(id) {
+  const resp = await client.from('scores').delete().match({ id }).single();
+  return parseData(resp);
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { fetchProfileById } from '../../services/profile';
-import { fetchScoresByProfileId } from '../../services/scores';
+import { deleteScore, fetchScoresByProfileId } from '../../services/scores';
 import { StyledTetrisWrapper } from '../Styles/StyledTetris';
 
 export default function Profile() {
@@ -14,6 +14,7 @@ export default function Profile() {
   const [scores, setScores] = useState([]);
   const params = useParams();
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +41,11 @@ export default function Profile() {
     };
     fetchScores();
   }, [id]);
+
+  const removeScore = async () => {
+    await deleteScore(id);
+    history.push('/');
+  };
 
   if (loading)
     return (
@@ -73,7 +79,7 @@ export default function Profile() {
             <>
               <li key={score.id}>
                 {`Time Created: ${score.created_at}   Score: ${score.score}`}
-                <button>Delete</button>
+                <button onClick={removeScore}>Delete</button>
               </li>
             </>
           ))}
