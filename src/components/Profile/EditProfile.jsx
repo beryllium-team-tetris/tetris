@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { fetchProfileById, updateProfile } from '../../services/profile';
 import ProfileForm from './ProfileForm';
 
 export default function EditProfile() {
@@ -19,7 +20,7 @@ export default function EditProfile() {
     const fetchProfile = async () => {
       try {
         //make sure to insert proper fetch
-        const data = await profilefetchplaceholder(id);
+        const data = await fetchProfileById(id);
         setName(data.name);
         setEmail(data.name);
         setUsername(data.name);
@@ -34,7 +35,7 @@ export default function EditProfile() {
     e.preventDefault();
     try {
       //make sure to properly fill in the fetch
-      await editProfileplaceholder({ id, username, email, name });
+      await updateProfile({ id, username, email, name });
       setMessage('Profile Was Edited Successfully');
       setTimeout(() => history.push(`/profile/${id}`), 3500);
     } catch (error) {
