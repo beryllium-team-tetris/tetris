@@ -42,11 +42,6 @@ export default function Profile() {
     fetchScores();
   }, [id]);
 
-  const removeScore = async () => {
-    await deleteScore(id);
-    history.push('/');
-  };
-
   if (loading)
     return (
       <StyledTetrisWrapper>
@@ -76,12 +71,17 @@ export default function Profile() {
         <h1>All Your Scores</h1>
         <ol>
           {scores.map((score) => (
-            <>
-              <li key={score.id}>
-                {`Time Created: ${score.created_at}   Score: ${score.score}`}
-                <button onClick={removeScore}>Delete</button>
-              </li>
-            </>
+            <li key={score.id}>
+              {`Time Created: ${score.created_at}   Score: ${score.score}`}
+              <button
+                onClick={async () => {
+                  await deleteScore(score.id);
+                  setScores(scores.filter((points) => points.id !== score.id));
+                }}
+              >
+                Delete
+              </button>
+            </li>
           ))}
         </ol>
       </div>
