@@ -20,9 +20,12 @@ export default function Header() {
     : 
     <>
     <p>User: {currentUser.email}</p>
-    {<Link to="/profile/:id">
+    <Link to="/profile/:id">
         <button>Your Profile</button>
-    </Link>}
+    </Link>
+    <Link to="/scores">
+      <button>Leaderboard</button>
+    </Link>
     <button
      type="submit"
      onClick={handleSubmit}>
@@ -30,6 +33,9 @@ export default function Header() {
      </button>
     </>
     }
+    <Link to="/">
+      <button>Tetris</button>
+    </Link>
     </header>
   )
 }
