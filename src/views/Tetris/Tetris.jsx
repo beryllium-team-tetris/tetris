@@ -19,6 +19,7 @@ import { useGrid } from '../../hooks/useGrid';
 import { usePlayer } from '../../hooks/usePlayer';
 import useInterval from '../../hooks/useInterval';
 import { useGameStatus } from '../../hooks/useGameStatus';
+import { insertScore } from '../../services/scores';
 
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
@@ -106,7 +107,10 @@ export default function Tetris() {
           <GameGrid grid={grid} />
           <aside>
             {gameOver ? (
-              <Display gameOver={gameOver} text="Game Over!" />
+              <>
+                <Display gameOver={gameOver} text="Game Over!" />
+                <Display text={`Score: ${score}`} />
+              </>
             ) : (
               <div>
                 <Display text={`Score: ${score}`} />

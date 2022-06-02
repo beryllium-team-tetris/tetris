@@ -20,7 +20,6 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        //make sure to insert proper fetch
         const data = await fetchProfileById(id);
         setName(data.name);
         setEmail(data.email);
@@ -35,7 +34,6 @@ export default function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //make sure to properly fill in the fetch
       await updateProfile({ id, username, email, name });
       setMessage('Profile Was Edited Successfully');
       setTimeout(() => history.push(`/profile/${id}`), 2500);
