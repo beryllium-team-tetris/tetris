@@ -134,7 +134,6 @@ export default function Tetris() {
         onKeyDown={(e) => move(e)}
         onKeyUp={keyUp}
       >
-        <h1>Tetris</h1>
         {error && <p>{error}</p>}
         <StyledTetris>
           <GameGrid grid={grid} />

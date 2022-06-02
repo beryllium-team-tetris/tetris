@@ -10,6 +10,8 @@ export const StyledLeaderboard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: x-large;
+  padding-top: 25px;
 `;
 
 export const StyledScore = styled.td`

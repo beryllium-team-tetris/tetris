@@ -11,13 +11,16 @@ export default function Header() {
 
   return (
     <header>
-    <h1>Tetris</h1>
+    <Link to='/'>
+      <h1 className={headerStyling.homeButton}>Tetris</h1>
+    </Link>
     {!currentUser ? 
     <Link to="/login">
         <button>Register account</button>
     </Link> 
     : 
     <>
+    <div className={headerStyling.controls}>
     <p>User: {currentUser.email}</p>
     <Link to={`/profile/${profileID}`}>
         <button>Your Profile</button>
@@ -30,11 +33,9 @@ export default function Header() {
      onClick={handleSubmit}>
          Logout
      </button>
+     </div>
     </>
     }
-    <Link to='/'>
-      <button>Tetris</button>
-    </Link>
     </header>
   );
 }

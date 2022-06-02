@@ -1,6 +1,5 @@
 import React from 'react';
 import { useScores } from '../../hooks/scores';
-import { getScores } from '../../services/scores';
 import { Link } from 'react-router-dom';
 import {
   StyledHeading,
