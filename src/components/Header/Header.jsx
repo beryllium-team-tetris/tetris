@@ -14,7 +14,7 @@ export default function Header() {
       <h1>Tetris</h1>
       {!currentUser ? (
         <Link to="/login">
-          <button>Sign-up</button>
+          <button>Register account</button>
         </Link>
       ) : (
         <>
