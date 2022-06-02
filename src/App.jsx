@@ -7,7 +7,7 @@ import Leaderboard from './views/Scores/Leaderboard';
 import ScoreDetail from './views/Scores/ScoreDetail';
 import EditProfile from './components/Profile/EditProfile';
 import CreateProfile from './components/Profile/CreateProfile';
-import Profile from './components/Profile/profile';
+import Profile from './components/Profile/Profile';
 
 export default function App() {
   return (
