@@ -21,6 +21,7 @@ export default function App() {
         <PrivateRoute exact path="/scores/:id">
           <ScoreDetail />
         </PrivateRoute>
+
         <PrivateRoute exact path="/scores">
           <Leaderboard />
         </PrivateRoute>
@@ -28,9 +29,11 @@ export default function App() {
         <Route path="/profile/create">
           <CreateProfile />
         </Route>
+
         <PrivateRoute path="/profile/:id/edit">
           <EditProfile />
         </PrivateRoute>
+
         <PrivateRoute path="/profile/:id">
           <Profile />
         </PrivateRoute>
