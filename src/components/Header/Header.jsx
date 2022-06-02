@@ -11,23 +11,30 @@ export default function Header() {
 
   return (
     <header>
-      <h1>Tetris</h1>
-      {!currentUser ? (
-        <Link to="/login">
-          <button>Register account</button>
-        </Link>
-      ) : (
-        <>
-          <p>User: {currentUser.email}</p>
-          <Link to={`/profile/${profileID}`}>
-            <button>Your Profile</button>
-          </Link>
-          <button type="submit" onClick={handleSubmit}>
-            Logout
-          </button>
-        </>
-      )}
-
+    <h1>Tetris</h1>
+    {!currentUser ? 
+    <Link to="/login">
+        <button>Register account</button>
+    </Link> 
+    : 
+    <>
+    <p>User: {currentUser.email}</p>
+    <Link to={`/profile/${profileID}`}>
+        <button>Your Profile</button>
+    </Link>
+    <Link to="/scores">
+      <button>Leaderboard</button>
+    </Link>
+    <button
+     type="submit"
+     onClick={handleSubmit}>
+         Logout
+     </button>
+    </>
+    }
+    <Link to='/'>
+      <button>Tetris</button>
+    </Link>
     </header>
   );
 }
