@@ -37,7 +37,7 @@ export default function ProfileForm({
         />
       </label>
 
-      <button onClick={handleSubmit}>Profile</button>
+      <button onClick={handleSubmit}>Edit</button>
     </form>
   );
 }
