@@ -7,6 +7,7 @@ export default function ProfileForm({
   setEmail,
   name,
   setName,
+  handleSubmit,
 }) {
   return (
     <form>
