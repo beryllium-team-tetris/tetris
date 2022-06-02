@@ -23,6 +23,21 @@ import { insertScore } from '../../services/scores';
 import { useAuth } from '../../hooks/user';
 
 export default function Tetris() {
+  // Disable arrow key scroll behavior
+  window.addEventListener(
+    'keydown',
+    function (e) {
+      if (
+        ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(
+          e.code
+        ) > -1
+      ) {
+        e.preventDefault();
+      }
+    },
+    false
+  );
+
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [player, updatePlayerPosition, resetPlayer, playerRotate] = usePlayer();

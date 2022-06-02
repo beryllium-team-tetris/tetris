@@ -76,7 +76,9 @@ export default function Profile() {
         <ol>
           {scores.map((score) => (
             <li key={score.id}>
-              {`Time Created: ${score.created_at}   Score: ${score.score}`}
+              {`Time Created: ${new Date(
+                score.created_at
+              ).toDateString()}   Score: ${score.score}`}
               {profileID === score.profile_id && (
                 <button
                   onClick={async () => {
