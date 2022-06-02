@@ -17,7 +17,7 @@ export default function CreateProfile() {
       //make sure to insert proper fetch
       await createProfileplaceholder({ username, email, name });
       setMessage('Profile Successfully Created');
-      setTimeout(() => history.push('/'), 3500);
+      setTimeout(() => history.push('/'), 2500);
     } catch (error) {
       setError('Make Sure To Fill In All Of The Fields');
     }

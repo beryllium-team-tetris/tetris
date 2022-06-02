@@ -21,3 +21,11 @@ export async function createProfile(profile) {
 
   return parseData(data);
 }
+
+export async function updateProfile(profile) {
+  const data = await client
+    .from('profiles')
+    .update(profile)
+    .eq('id', profile.id);
+  return parseData(data);
+}

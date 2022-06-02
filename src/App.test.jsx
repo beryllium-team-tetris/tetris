@@ -1,4 +1,7 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import {
+  render,
+  screen,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
@@ -48,16 +51,16 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe('<App />', () => {
-    it(`displays auth page that directs to tetris game and has buttons for profile and scoreboard`, async () => {
-        render(
-            <MemoryRouter>
-                <UserProvider>
-                    <App />
-                </UserProvider>
-            </MemoryRouter>
-        );
+  it(`displays auth page that directs to tetris game and has buttons for profile and scoreboard`, async () => {
+    render(
+      <MemoryRouter>
+        <UserProvider>
+          <App />
+        </UserProvider>
+      </MemoryRouter>
+    );
 
-        const registerButton = await screen.findByRole('button', { name: /register account/i});
+    const registerButton = await screen.findByRole('button', { name: /register account/i});
         userEvent.click(registerButton);
 
         const emailInput = await screen.findByPlaceholderText(/email address/i);
@@ -75,6 +78,5 @@ describe('<App />', () => {
 
 
         // const testUsername1 = await screen.findByText(/testing_username/i);
-
-    });
+  });
 });

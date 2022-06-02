@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GameGrid from '../../components/GameGrid/GameGrid';
 import Display from '../../components/Display/Display';
 import StartButton from '../../components/StartButton/StartButton';
@@ -19,6 +19,8 @@ import { useGrid } from '../../hooks/useGrid';
 import { usePlayer } from '../../hooks/usePlayer';
 import useInterval from '../../hooks/useInterval';
 import { useGameStatus } from '../../hooks/useGameStatus';
+import { insertScore } from '../../services/scores';
+import { useAuth } from '../../hooks/user';
 
 export default function Tetris() {
   const [dropTime, setDropTime] = useState(null);
@@ -27,6 +29,9 @@ export default function Tetris() {
   const [grid, setGrid, rowsCleared] = useGrid(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] =
     useGameStatus(rowsCleared);
+  const [error, setError] = useState('');
+
+  const { profileID } = useAuth();
 
   const movePlayer = (direction) => {
     if (!checkCollision(player, grid, { x: direction, y: 0 })) {
@@ -93,6 +98,19 @@ export default function Tetris() {
     drop();
   }, dropTime);
 
+  useEffect(() => {
+    if (gameOver) {
+      const updateScore = async () => {
+        try {
+          await insertScore({ score, profile_id: profileID });
+        } catch (error) {
+          setError(error.message);
+        }
+      };
+      updateScore();
+    }
+  }, [gameOver]);
+
   return (
     <>
       <StyledTetrisWrapper
@@ -102,11 +120,15 @@ export default function Tetris() {
         onKeyUp={keyUp}
       >
         <h1>Tetris</h1>
+        {error && <p>{error}</p>}
         <StyledTetris>
           <GameGrid grid={grid} />
           <aside>
             {gameOver ? (
-              <Display gameOver={gameOver} text="Game Over!" />
+              <>
+                <Display gameOver={gameOver} text="Game Over!" />
+                <Display text={`Score: ${score}`} />
+              </>
             ) : (
               <div>
                 <Display text={`Score: ${score}`} />

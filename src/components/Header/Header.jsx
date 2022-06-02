@@ -1,13 +1,12 @@
-import { useAuth } from "../../hooks/user";
-import { Link } from "react-router-dom";
+import { useAuth } from '../../hooks/user';
+import { Link } from 'react-router-dom';
 import headerStyling from './Header.css';
 
 export default function Header() {
-
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, profileID } = useAuth();
 
   const handleSubmit = () => {
-      logout();
+    logout();
   };
 
   return (
@@ -20,7 +19,7 @@ export default function Header() {
     : 
     <>
     <p>User: {currentUser.email}</p>
-    <Link to="/profile/:id">
+    <Link to={`/profile/${profileID}`}>
         <button>Your Profile</button>
     </Link>
     <Link to="/scores">
@@ -33,9 +32,9 @@ export default function Header() {
      </button>
     </>
     }
-    <Link to="/">
+    <Link to='/'>
       <button>Tetris</button>
     </Link>
     </header>
-  )
+  );
 }
