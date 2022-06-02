@@ -37,6 +37,7 @@ export default function Auth() {
 
   return (
     <div className={authStyling.body}>
+      {error && <p>{error}</p>}
       <h1>
         <span
           className={type === 'sign-in' ? authStyling.active : ''}
@@ -74,7 +75,6 @@ export default function Auth() {
           {type}
         </button>
       </form>
-      <p>{error}</p>
     </div>
   );
 }

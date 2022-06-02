@@ -15,6 +15,7 @@ const server = setupServer(
   rest.post(`${process.env.SUPABASE_URL}/auth/v1/signup`, (req, res, ctx) =>
     res(ctx.json(fakeUserData))
   )
+
 );
 
 beforeAll(() => server.listen());
