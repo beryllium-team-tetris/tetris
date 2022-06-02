@@ -1,4 +1,3 @@
-import Profile from '../components/Profile/profile';
 import { client, parseData } from './client';
 
 export async function fetchProfileById(id) {
