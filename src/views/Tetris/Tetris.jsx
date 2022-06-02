@@ -31,7 +31,7 @@ export default function Tetris() {
     useGameStatus(rowsCleared);
   const [error, setError] = useState('');
 
-  const { profileID } = useAuth();
+  const { user, profileID } = useAuth();
 
   const movePlayer = (direction) => {
     if (!checkCollision(player, grid, { x: direction, y: 0 })) {
@@ -102,7 +102,7 @@ export default function Tetris() {
     if (gameOver) {
       const updateScore = async () => {
         try {
-          await insertScore({ score, profile_id: profileID });
+          await insertScore({ score, profile_id: profileID, user_id: user.id });
         } catch (error) {
           setError(error.message);
         }
