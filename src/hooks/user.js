@@ -43,8 +43,8 @@ export const useAuth = () => {
           setError(error.message);
         }
       }
-      getProfileData();
     };
+    getProfileData();
   }, [user]);
 
   const login = async (email, password) => {
