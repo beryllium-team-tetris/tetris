@@ -11,15 +11,26 @@ export default function Leaderboard() {
     <StyledTetrisWrapper>
       <h1>Leaderboard</h1>
 
-      <ol>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Score</th>
+          </tr>
+        </thead>
         {topScores.map((score) => (
-          <Link to={`/profile/${score.profile_id}`}>
-            <li
-              key={score.id}
-            >{`${score.profiles.username} ${score.score}`}</li>
-          </Link>
+          <tr key={score.id}>
+            <td>
+              <Link to={`/profile/${score.profile_id}`}>
+                {score.profiles.username
+                  ? score.profiles.username
+                  : score.profiles.email}
+              </Link>
+            </td>
+            <td>{score.score}</td>
+          </tr>
         ))}
-      </ol>
+      </table>
     </StyledTetrisWrapper>
   );
 }

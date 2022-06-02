@@ -3,7 +3,7 @@ import { client, parseData } from './client';
 export async function getScores() {
   const resp = await client
     .from('scores')
-    .select('*, profiles (username)')
+    .select('*, profiles (username, email)')
     .order('score', { ascending: false });
   return parseData(resp);
 }
