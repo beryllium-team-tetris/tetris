@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { fetchProfileById, updateProfile } from '../../services/profile';
-import { StyledTetrisWrapper } from '../Styles/StyledTetris';
-import ProfileForm from './ProfileForm';
+import { StyledTetrisWrapper } from '../../components/Styles/StyledTetris';
+import ProfileForm from '../../components/Profile/ProfileForm';
 
 export default function EditProfile() {
   const [username, setUsername] = useState('');
