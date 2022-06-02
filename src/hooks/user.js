@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../context/UserContext';
+import { fetchProfileByUserId } from '../services/profile';
 import { signUpUser, signInUser, signOutUser } from '../services/users';
 
 export const useAuth = () => {
@@ -21,9 +22,30 @@ export const useAuth = () => {
     type,
     setType,
     currentUser,
+    profileID,
+    setProfileID,
+    username,
+    setUsername,
   } = context;
 
   const isLoggedIn = user?.email;
+
+  useEffect(() => {
+    const getProfileData = async () => {
+      if (isLoggedIn) {
+        console.log('user.id', user.id);
+        try {
+          const profileData = await fetchProfileByUserId(user.id);
+          console.log('profileData', profileData);
+          setProfileID(profileData.id);
+          setUsername(profileData.username);
+        } catch (error) {
+          setError(error.message);
+        }
+      }
+      getProfileData();
+    };
+  }, [user]);
 
   const login = async (email, password) => {
     const authenticatedUser = await signInUser(email, password);
@@ -56,5 +78,7 @@ export const useAuth = () => {
     type,
     setType,
     currentUser,
+    profileID,
+    username,
   };
 };
