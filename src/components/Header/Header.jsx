@@ -11,31 +11,25 @@ export default function Header() {
 
   return (
     <header>
-    <Link to='/'>
-      <h1 className={headerStyling.homeButton}>Tetris</h1>
-    </Link>
-    {!currentUser ? 
-    <Link to="/login">
-        <button>Register account</button>
-    </Link> 
-    : 
-    <>
-    <div className={headerStyling.controls}>
-    <p>User: {currentUser.email}</p>
-    <Link to={`/profile/${profileID}`}>
-        <button>Your Profile</button>
-    </Link>
-    <Link to="/scores">
-      <button>Leaderboard</button>
-    </Link>
-    <button
-     type="submit"
-     onClick={handleSubmit}>
-         Logout
-     </button>
-     </div>
-    </>
-    }
+      <Link to="/">
+        <h1 className={headerStyling.homeButton}>Tetris</h1>
+      </Link>
+      {currentUser && (
+        <>
+          <div className={headerStyling.controls}>
+            <p>User: {currentUser.email}</p>
+            <Link to={`/profile/${profileID}`}>
+              <button>Your Profile</button>
+            </Link>
+            <Link to="/scores">
+              <button>Leaderboard</button>
+            </Link>
+            <button type="submit" onClick={handleSubmit}>
+              Logout
+            </button>
+          </div>
+        </>
+      )}
     </header>
   );
 }

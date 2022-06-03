@@ -31,9 +31,9 @@ export default function App() {
           <Profile />
         </PrivateRoute>
 
-        <Route path="/">
+        <PrivateRoute path="/">
           <Tetris />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </>
   );
