@@ -6,6 +6,10 @@ import { fetchProfileById } from '../../services/profile';
 import { deleteScore, fetchScoresByProfileId } from '../../services/scores';
 import { StyledTetrisWrapper } from '../../components/Styles/StyledTetris';
 import { useAuth } from '../../hooks/user';
+import {
+  StyledProfile,
+  StyledScore,
+} from '../../components/Styles/StyledProfile';
 
 export default function Profile() {
   const [profile, setProfile] = useState('');
@@ -59,7 +63,7 @@ export default function Profile() {
     );
 
   return (
-    <StyledTetrisWrapper>
+    <StyledProfile>
       {error && <p>{error}</p>}
       <div key={profile.id}>
         <h1>{profile.name}</h1>
@@ -76,9 +80,8 @@ export default function Profile() {
         <ol>
           {scores.map((score) => (
             <li key={score.id}>
-              {`Time Created: ${new Date(
-                score.created_at
-              ).toDateString()}   Score: ${score.score}`}
+              <StyledScore>{`Score: ${score.score}`}</StyledScore>
+              <p>{`Date: ${new Date(score.created_at).toDateString()}`}</p>
               {profileID === score.profile_id && (
                 <button
                   onClick={async () => {
@@ -95,6 +98,6 @@ export default function Profile() {
           ))}
         </ol>
       </div>
-    </StyledTetrisWrapper>
+    </StyledProfile>
   );
 }

@@ -33,10 +33,8 @@ export const useAuth = () => {
   useEffect(() => {
     const getProfileData = async () => {
       if (isLoggedIn) {
-        console.log('user.id', user.id);
         try {
           const profileData = await fetchProfileByUserId(user.id);
-          console.log('profileData', profileData);
           setProfileID(profileData.id);
           setUsername(profileData.username);
         } catch (error) {
