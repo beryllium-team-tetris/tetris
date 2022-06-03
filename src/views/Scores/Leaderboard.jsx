@@ -1,25 +1,42 @@
 import React from 'react';
-import { StyledTetrisWrapper } from '../../components/Styles/StyledTetris';
 import { useScores } from '../../hooks/scores';
-import { getScores } from '../../services/scores';
 import { Link } from 'react-router-dom';
+import {
+  StyledHeading,
+  StyledLeaderboard,
+  StyledScore,
+  StyledUsername,
+} from '../../components/Styles/StyledLeaderboard';
 
 export default function Leaderboard() {
   const { scores } = useScores();
   const topScores = scores.slice(0, 10);
   return (
-    <StyledTetrisWrapper>
-      <h1>Leaderboard</h1>
+    <StyledLeaderboard>
+      <StyledHeading>Leaderboard</StyledHeading>
 
-      <ol>
-        {topScores.map((score) => (
-          <Link to={`/profile/${score.profile_id}`}>
-            <li
-              key={score.id}
-            >{`${score.profiles.username} ${score.score}`}</li>
-          </Link>
-        ))}
-      </ol>
-    </StyledTetrisWrapper>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {topScores.map((score) => (
+            <tr key={score.id}>
+              <StyledUsername className="username">
+                <Link to={`/profile/${score.profile_id}`}>
+                  {score.profiles.username
+                    ? score.profiles.username
+                    : score.profiles.email}
+                </Link>
+              </StyledUsername>
+              <StyledScore className="score">{score.score}</StyledScore>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </StyledLeaderboard>
   );
 }

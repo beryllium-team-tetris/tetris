@@ -4,4 +4,16 @@ header {
 
 button {
     color: red;
+    margin: 2px;
+}
+
+.homeButton {
+    color: orange;
+    display: flex;
+    justify-content: center;
+}
+
+.controls {
+    padding-left: 20px;
+    padding-bottom: 10px;
 }
