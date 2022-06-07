@@ -1,5 +1,8 @@
 * {
   color: white;
   margin: 0;
-  /* background-color: black; */
+}
+
+body {
+  background-color: black;
 }

@@ -7,6 +7,7 @@ import Leaderboard from './views/Scores/Leaderboard';
 import ScoreDetail from './views/Scores/ScoreDetail';
 import EditProfile from './views/Profile/EditProfile';
 import Profile from './views/Profile/Profile';
+import AboutUs from './views/Devs/AboutUs';
 
 export default function App() {
   return (
@@ -30,6 +31,10 @@ export default function App() {
         <PrivateRoute path="/profile/:id">
           <Profile />
         </PrivateRoute>
+
+        <Route path="/developers">
+          <AboutUs />
+        </Route>
 
         <PrivateRoute path="/">
           <Tetris />
