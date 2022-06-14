@@ -5,6 +5,7 @@
 
 body {
   background-color: black;
+  min-height: 100vh;
 }
 
 article h1 {

@@ -6,4 +6,6 @@ export const StyledDevSection = styled.section`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  flex-grow: 1;
+  height: 100%;
 `;

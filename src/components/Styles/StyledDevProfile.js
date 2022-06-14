@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-export const StyledDevProfile = styled.div`
+export const StyledDevProfile = styled.aside`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-grow: 1;
   align-items: center;
   box-sizing: border-box;
   width: 15rem;
