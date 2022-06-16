@@ -1,5 +1,14 @@
 * {
   color: white;
   margin: 0;
-  /* background-color: black; */
+}
+
+body {
+  background-color: black;
+  min-height: 100vh;
+}
+
+article h1 {
+  text-align: center;
+  margin-top: 1rem;
 }
